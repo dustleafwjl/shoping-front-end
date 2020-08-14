@@ -1,34 +1,11 @@
 import React from "react";
 import ProductCard from '../../components/ProductCard'
+import { getProducts } from '../../API/product'
 
 class Shopping extends React.Component {
 
   state = {
     products: [
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
-      },
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
-      },
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
-      },
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
-      },
       {
         name: "wjl",
         price: 12,
@@ -46,20 +23,18 @@ class Shopping extends React.Component {
         price: 12,
         img: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597403181991&di=c64753b31a86900c75fb890c17c46d89&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F017483591da785b5b3086ed4904903.jpg",
         unit: "瓶"
-      },
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
-      },
-      {
-        name: "wjl",
-        price: 12,
-        img: "",
-        unit: "瓶"
       }
     ]
+  }
+
+
+  componentDidMount() {
+    getProducts().then(res => {
+      console.log(res.data)
+      this.setState({
+        products: res.data
+      })
+    })
   }
 
   render() {
@@ -74,11 +49,13 @@ class Shopping extends React.Component {
         
       }}>
         {
-          this.state.products.map(product => <ProductCard 
+          this.state.products.map((product, index) => <ProductCard 
             name={product.name}
             price={product.price}
             img={product.img}
             unit={product.unit}
+            key={product.name+index}
+            onClick={() => {this.props.history.push("/product")}}
             />)
         }
       </div>

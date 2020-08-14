@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './index.module.css'
-import { Input, Form, Button } from 'antd';
+import { Input, Form, Button, Modal } from 'antd';
 
 import { addProduct } from '../../API/product'
 
@@ -11,25 +11,61 @@ class Product extends React.Component {
     name: '',
     price: '',
     unit: '',
-    img: ''
+    img: '',
+    disabled: true
+  }
+
+  validtion = () => {
+    if(this.state.name && this.state.price && this.state.unit && this.state.img) {
+      this.setState({
+        disabled: false
+      })
+    } else {
+      this.setState({
+        disabled: true
+      })
+    }
   }
   onSubmit = (e) => {
     e.preventDefault()
-    console.log({
-      name: this.state.name,
-      prive: this.state.price,
-      unit: this.state.unit,
-      img: this.state.img
-    })
     addProduct({
       name: this.state.name,
-      prive: this.state.price,
+      price: this.state.price,
       unit: this.state.unit,
       img: this.state.img
+    }).then(res => {
+      console.log(res);
+      Modal.confirm({
+        title: '添加商品！',
+        content: '商品添加成功！将跳到商品页面',
+        okText: '确认',
+        cancelText: "取消",
+        onOk: () => {
+          this.props.history.push("/shopping")
+        },
+      });
     })
+  }
+
+  handleNameChange = (e) => {
+    this.setState({name: e.target.value});
+    this.validtion()
+  }
+  handlePriceChange = (e) => {
+    this.setState({price: e.target.value});
+    this.validtion()
+  }
+  handleUnitChange = (e) => {
+    this.setState({unit: e.target.value});
+    this.validtion()
+  }
+  handleImgChange = (e) => {
+    this.setState({img: e.target.value});
+    this.validtion()
   }
   render() {
     return (
+      
       <form 
         onSubmit={this.onSubmit}
         className={styles.product}>
@@ -41,7 +77,7 @@ class Product extends React.Component {
             <div>
               <span style={{color: 'red'}}>*</span>名称：
             </div>
-            <Input value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}></Input>
+            <Input value={this.state.name} onChange={this.handleNameChange}></Input>
           </div>
           <div
             name="price"
@@ -49,7 +85,7 @@ class Product extends React.Component {
             <div>
               <span style={{color: 'red'}}>*</span>价格
             </div>
-            <Input value={this.state.price} onChange={(e) => this.setState({price: e.target.value})}></Input>
+            <Input value={this.state.price} onChange={this.handlePriceChange}></Input>
           </div>
           <div
             name="unit"
@@ -57,7 +93,7 @@ class Product extends React.Component {
             <div>
               <span style={{color: 'red'}}>*</span>单位
             </div>
-            <Input value={this.state.unit} onChange={(e) => this.setState({unit: e.target.value})}></Input>
+            <Input value={this.state.unit} onChange={this.handleUnitChange}></Input>
           </div>
           <div
             name="img"
@@ -65,10 +101,10 @@ class Product extends React.Component {
             <div>
               <span style={{color: 'red'}}>*</span>图片
             </div>
-            <Input value={this.state.img} onChange={(e) => this.setState({img: e.target.value})}></Input>
+            <Input value={this.state.img} onChange={this.handleImgChange}></Input>
           </div>
           <div>
-            <button type="submit">
+            <button type="submit" disabled={this.state.disabled}>
               提交
             </button>
           </div>

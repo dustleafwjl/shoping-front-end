@@ -3,6 +3,7 @@ import { PlusCircleOutlined }  from '@ant-design/icons';
 
 const ProductCard = (props) => {
   const { name, price, img, unit } = props;
+  console.log(props)
   return (
     <div style={{
       width: '160px',
@@ -32,7 +33,7 @@ const ProductCard = (props) => {
         bottom: "15px",
         right: '15px'
       }}>
-        <PlusCircleOutlined />
+        <PlusCircleOutlined/>
       </div>
     </div>
   )
