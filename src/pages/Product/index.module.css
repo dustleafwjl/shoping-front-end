@@ -1,0 +1,29 @@
+.product {
+  box-sizing: border-box;
+  padding: 20px 10px;
+  background-color: #fff;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.item {
+  padding: 10px 0px 10px;
+  text-align: left;
+}
+
+main {
+  text-align: left;
+  padding: 0px 40px;
+}
+button {
+  background-color: #0080ff;
+  color: #fff;
+  border-radius: 4px;
+  width: 120px;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  outline: none;
+}

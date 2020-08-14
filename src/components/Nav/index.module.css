@@ -1,0 +1,35 @@
+.header {
+  height: 60px;
+  background-color: #000;
+  text-align: left;
+}
+
+ul {
+  list-style: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+li {
+  width: 120px;
+  height: 60px;
+  line-height: 60px;
+  /* margin-left: 20px; */
+  color: #fff;
+}
+li > a {
+  display: inline-block;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+li > a > span {
+  padding-right: 10px;
+}
+.active {
+  background-color: #80ffff;
+}
