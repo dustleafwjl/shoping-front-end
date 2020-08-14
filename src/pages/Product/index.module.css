@@ -28,3 +28,8 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+button[disabled] {
+  color: white !important;
+  background: #eee !important;
+}

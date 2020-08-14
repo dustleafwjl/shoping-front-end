@@ -34,7 +34,6 @@ class Product extends React.Component {
       unit: this.state.unit,
       img: this.state.img
     }).then(res => {
-      console.log(res);
       Modal.confirm({
         title: '添加商品！',
         content: '商品添加成功！将跳到商品页面',
